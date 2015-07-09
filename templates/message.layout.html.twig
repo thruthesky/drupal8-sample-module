@@ -11,13 +11,16 @@
     }
 </script>
 {% import dir_message ~ '/templates/macro/html.html.twig' as html %}
-<section class="post">
-
+<section class="message">
     <div class="{{ data.page }}">
-        {% if data.page %}
-            {% include dir_message ~ '/templates/message.' ~ data.page ~ '.html.twig' %}
+        {% if data.error %}
+            {{ html.error(data) }}
         {% else %}
-            <script>ml('Wrong access');</script>
+            {% if data.page %}
+                {% include dir_message ~ '/templates/message.' ~ data.page ~ '.html.twig' %}
+            {% else %}
+                <script>ml('Wrong access');</script>
+            {% endif %}
         {% endif %}
     </div>
 </section>
