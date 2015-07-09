@@ -1,0 +1,23 @@
+<script type="text/javascript">
+    var messageLanguageCode = 'en';
+    if ( location.host.indexOf('sonub') != -1 ) messageLanguageCode = 'ko';
+    var messageLanguage = [];
+    messageLanguage['Wrong access'] = {
+        'en': 'Wrong access : No page code',
+        'ko' :'잘못된 접근 : 페이지 값이 없습니다.'
+    };
+    function ml(code) {
+        document.write(messageLanguage[code][messageLanguageCode]);
+    }
+</script>
+{% import dir_message ~ '/templates/macro/html.html.twig' as html %}
+<section class="post">
+
+    <div class="{{ data.page }}">
+        {% if data.page %}
+            {% include dir_message ~ '/templates/message.' ~ data.page ~ '.html.twig' %}
+        {% else %}
+            <script>ml('Wrong access');</script>
+        {% endif %}
+    </div>
+</section>

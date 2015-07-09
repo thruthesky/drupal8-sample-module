@@ -1,0 +1,13 @@
+global-styling:
+  version: 1.x
+  js:
+    js/message.js: {}
+  dependencies:
+    - core/jquery
+    - core/underscore
+  css:
+    theme:
+      css/message.base.css: {}
+      css/message.layout.css: {}
+      css/message.component.css: {}
+      css/message.state.css: {}

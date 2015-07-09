@@ -1,0 +1,61 @@
+{% macro row(d) %}
+    <div class='row {{ d.class | default(d.name) }}'>
+        <label for="{{ d.id | default(d.name) }}" class='caption'>{{ d.label | default( d.name ) }}</label>
+        <div class='text'>{{ d.value | raw }}</div>
+    </div>
+{% endmacro %}
+{% macro input(d) %}
+    <div class='row data-set {{ d.class | default(d.name) }}'>
+        <label for="{{ d.id | default(d.name) }}" class='caption'>{{ d.label | default( d.name ) }}</label>
+        <div class='text'><input type="{{ d.type | default('text') }}" id="{{ d.id | default(d.name) }}" name="{{ d.name }}" value="{{ d.value | e }}" placeholder="{{ d.placeholder | e  }}"></div>
+    </div>
+{% endmacro %}
+{% macro textarea(d) %}
+    <div class="row data-set {{ d.class | default(d.name) }}">
+        <label for="{{ d.id | default(d.name) }}" class='caption'>{{ d.label | default( d.name ) }}</label>
+        <div class="text"><textarea id="{{ d.id | default(d.name) }}" name="{{ d.name }}" placeholder="{{ d.placeholder | e  }}">{{ d.value | e }}</textarea></div>
+    </div>
+{% endmacro %}
+{% macro radio(name, caption, data) %}
+    <div class='row data-set {{ name }}'>
+        <div class="caption">{{ caption }}</div>
+        {% for d in data %}
+            <div class='text'>
+                <input type="radio" id="{{ d.id | default(d.name)  }}" name="{{ name }}" value="{{ d.value | e }}"{{ d.value == d.default ? ' checked=1' }}>
+                <label for="{{ d.id | default(d.name) }}">{{ d.label | default( name ) }}</label>
+            </div>
+
+        {% endfor %}
+    </div>
+{% endmacro %}
+{% macro select_number(d) %}
+    <div class='row data-set {{ d.name }}'>
+        <label for="{{ d.id | default(d.name) }}" class='caption'>{{ d.label | default( d.name ) }}</label>
+        <select id="{{ d.id | default(d.name) }}" name="{{ d.name }}">
+            {% for i in d.from .. d.to %}
+                <option value="{{ i }}"{{ d.default == i ? ' selected=1' }}>{{ i }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endmacro %}
+{% macro select_month(d) %}
+    <div class='row data-set {{ d.name }}'>
+        <label for="{{ d.id | default(d.name) }}" class='caption'>{{ d.label | default( d.name ) }}</label>
+        <select id={{ d.id | default(d.name) }} name="{{ d.name }}">
+            {% for m in 1..12 %}
+                <option value="{{ m }}"{{ d.default == m ? ' selected=1' }}>{{ date('2012-' ~ m ~ '-01') |date('F') }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endmacro %}
+
+{% macro error(data) %}
+    {% if data.error %}
+        <section class="error">
+            <h3>{{ data.error_title | default('Error') }}</h3>
+            <div class="row">
+                <div class="message">{{ data.error }}</div>
+            </div>
+        </section>
+    {% endif %}
+{% endmacro %}

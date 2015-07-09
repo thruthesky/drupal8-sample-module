@@ -1,0 +1,20 @@
+<?php
+
+
+function message_theme()
+{
+    return [
+        'message.layout' => [
+            'variables' => [ 'data' => null ],
+            'template' => 'message.layout'
+        ],
+    ];
+
+}
+
+function message_preprocess( &$variables, $hook )
+{
+    $variables['dir_message'] = 'modules/message';
+}
+
+

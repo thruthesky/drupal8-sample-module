@@ -1,0 +1,6 @@
+message.list:
+  path: '/message/{page}'
+  defaults:
+    _controller: Drupal\message\Controller\MessageController::defaultController
+  requirements:
+    _permission: 'access content'

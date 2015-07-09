@@ -1,0 +1,4 @@
+name: Message
+type: module
+description: 'This is a message module'
+core: 8.x
